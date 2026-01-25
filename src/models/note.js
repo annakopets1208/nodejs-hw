@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const studentSchema = mongoose.Schema(
+const noteSchema = mongoose.Schema(
   {
     title: {
       type: String,
@@ -32,4 +32,4 @@ const studentSchema = mongoose.Schema(
   { timestamps: true },
 );
 
-export const Note = mongoose.model('Note', studentSchema);
+export const Note = mongoose.model('Note', noteSchema);
