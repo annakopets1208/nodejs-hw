@@ -2,21 +2,25 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
+import cookieParser from 'cookie-parser';
 import { errors } from 'celebrate';
 import { connectMongoDB } from './db/connectMongoDB.js';
 import { notFoundHandler } from './middleware/notFoundHandler.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { logger } from './middleware/logger.js';
 import notesRoutes from './routes/notesRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(express.json({ limit: '10mb' }));
 app.use(cors());
 app.use(helmet());
+app.use(cookieParser());
 
 app.use(logger);
 
+app.use(authRoutes);
 app.use(notesRoutes);
 
 app.use(notFoundHandler);
